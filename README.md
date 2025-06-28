@@ -80,7 +80,7 @@ DeviceProcessEvents
 |project Timestamp, DeviceName,AccountName,ActionType, FileName, FolderPath, SHA256,ProcessCommandLine
 |order by Timestamp desc
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/b13707ae-8c2d-4081-a381-2b521d3a0d8f">
+<![image](https://github.com/user-attachments/assets/df23ad27-40d3-4dc1-9b4a-0f96651f4605)>
 
 ---
 
@@ -101,7 +101,8 @@ DeviceNetworkEvents
 |order by Timestamp desc
 
 ```
-<img width="1212" alt="image" src="https://github.com/user-attachments/assets/87a02b5b-7d12-4f53-9255-f5e750d0e3cb">
+![image](https://github.com/user-attachments/assets/bb29b40c-4af2-4cb4-a668-161f94fcde16)
+
 
 ---
 
