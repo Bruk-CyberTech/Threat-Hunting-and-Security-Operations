@@ -6,14 +6,14 @@
 - [Scenario Creation](https://github.com/Bruk-CyberTech/Threat-Hunting-and-Security-Operations/blob/main/threat-hunting-scenario-tor-event-creation.md)
 
 ## Platforms and Languages Leveraged
-- Windows 10 Virtual Machines (Microsoft Azure)
-- EDR Platform: Microsoft Defender for Endpoint
-- Kusto Query Language (KQL)
-- Tor Browser
+-   Windows 10 Virtual Machines (Microsoft Azure)
+-   EDR Platform: Microsoft Defender for Endpoint
+-   Kusto Query Language (KQL)
+-   Tor Browser
 
 ##  Scenario
 
-Management suspects that some employees may be using TOR browsers to bypass network security controls because recent network logs show unusual encrypted traffic patterns and connections to known TOR entry nodes. Additionally, there have been anonymous reports of employees discussing ways to access restricted sites during work hours. The goal is to detect any TOR usage and analyze related security incidents to mitigate potential risks. If any use of TOR is found, notify management.
+**Management suspects that some employees may be using **Tor browser** to bypass network security controls because recent network logs show unusual encrypted traffic patterns and connections to known TOR entry nodes. Additionally, there have been anonymous reports of employees discussing ways to access restricted sites during work hours. The goal is to detect any TOR usage and analyze related security incidents to mitigate potential risks. If any use of TOR is found, notify management**.
 
 ### High-Level TOR-Related IoC Discovery Plan
 
@@ -27,7 +27,7 @@ Management suspects that some employees may be using TOR browsers to bypass netw
 
 ### 1. Searched the `DeviceFileEvents` Table
 
-Searched the DeviceFileEvents table for ANY file that had the string "tor" in it and discovered what looks like the user "employeex" downloaded a tor installer, did something that resulted in many tor-related files being copied to the desktop and the creation of a file called I "tor-shopping-list.txt" on the desktop. These events began at: 2025-06-28T02:33:14.0483092Z.
+Searched the DeviceFileEvents table for ANY file that had the string "**tor**" in it and discovered what looks like the user "**employeex**" downloaded a tor installer, did something that resulted in many tor-related files being copied to the desktop and the creation of a file called I "tor-shopping-list.txt" on the desktop. These events began at: 2025-06-28T02:33:14.0483092Z.
 
 **Query used to locate events:**
 
@@ -47,7 +47,7 @@ DeviceFileEvents
 
 ### 2. Searched the `DeviceProcessEvents` Table
 
-Searched the DeviceProcessEvents table for any ProcessCommandLine that contained the string “tor-browser-windows-x86_64-portable-14.5.4.exe /s” Based on the logs returned, at 2025-06-28T02:33:14.0483092Z, “employeex” on the “bruk-threat-hun” device ran the file “tor-browser-windows-x86_64-portable-14.5.4.exe /s” from their Downloads folder, using a command that triggered a silent installation. 
+Searched the DeviceProcessEvents table for any ProcessCommandLine that contained the string “tor-browser-windows-x86_64-portable-14.5.4.exe /s” Based on the logs returned, at 2025-06-28T02:33:14.0483092Z, “**employeex**” on the “**bruk-threat-hun**” device ran the file “tor-browser-windows-x86_64-portable-14.5.4.exe **/s**” from their Downloads folder, using a command that **triggered a silent installation**. 
 
 **Query used to locate event:**
 
@@ -149,20 +149,23 @@ DeviceNetworkEvents
 ### 6. File Creation - TOR Shopping List
 
 - **Timestamp:** `2025-06-27T19:33:17 to 19:33:18`
-- **Event:** The user "employee" created a file named `tor-shopping-list.txt` on the desktop, potentially indicating a list or notes related to their TOR browser activities.
+- **Event:** The user "**employee**" created a file named `**tor-shopping-list.txt**` on the desktop, potentially indicating a list or notes related to their TOR browser activities.
 - **Action:** File creation detected.
-- **File Path:** `C:\Users\employee\Desktop\tor-shopping-list.txt`
+- **File Path:** `C:\Users\employee\Desktop\**tor-shopping-list.txt**`
 
 ---
 
 ## Summary
 
-The user "employee" on the "threat-hunt-lab" device initiated and completed the installation of the TOR browser. They proceeded to launch the browser, establish connections within the TOR network, and created various files related to TOR on their desktop, including a file named `tor-shopping-list.txt`. This sequence of activities indicates that the user actively installed, configured, and used the TOR browser, likely for anonymous browsing purposes, with possible documentation in the form of the "shopping list" file.
+On June 27, 2025, user "**Employeex**" on the "**Bruk-Threat-Hun**" device performed a silent installation of the portable **Tor Browser**.
+Within minutes, the browser was launched from the desktop, and both user-facing (**firefox.exe**) and background (tor.exe) processes were activated.
+Multiple Firefox content processes indicated full functionality of the browser.
+A confirmed connection to localhost (127.0.0.1) shows that the Tor routing service was successfully initiated, enabling anonymous web activity.
 
 ---
 
 ## Response Taken
 
-TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified.
+**TOR usage was confirmed on the endpoint `threat-hunt-lab` by the user `employee`. The device was isolated, and the user's direct manager was notified**.
 
 ---
